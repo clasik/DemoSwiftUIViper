@@ -1,0 +1,4 @@
+import SwiftUI
+
+struct RecipeViewModel {
+}

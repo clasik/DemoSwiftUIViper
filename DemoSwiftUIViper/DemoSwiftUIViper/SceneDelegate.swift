@@ -1,11 +1,3 @@
-//
-//  SceneDelegate.swift
-//  DemoSwiftUIViper
-//
-//  Created by Principal on 03/01/2020.
-//  Copyright © 2020 Principal. All rights reserved.
-//
-
 import UIKit
 import SwiftUI
 
@@ -20,7 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
+        let contentView = RecipesBookView()
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
