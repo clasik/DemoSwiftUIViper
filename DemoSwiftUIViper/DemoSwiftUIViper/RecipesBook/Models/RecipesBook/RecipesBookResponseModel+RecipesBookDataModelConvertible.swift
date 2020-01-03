@@ -1,28 +1,19 @@
 import Foundation
 
-protocol RecipesBookDataModelConvertible {
-    func recipesBookDataModel() throws -> RecipesBookDataModel
-}
-
 extension RecipesBookResponseModel: RecipesBookDataModelConvertible {
     func recipesBookDataModel() throws -> RecipesBookDataModel {
         guard let title = title else {
-            throw RecipeDataModelConvertibleError.missingTitle
+            throw RecipesBookDataModelConvertibleError.missingTitle
         }
         guard let href = href else {
-            throw RecipeDataModelConvertibleError.missingHref
+            throw RecipesBookDataModelConvertibleError.missingHref
         }
         guard let version = version else {
-            throw RecipeDataModelConvertibleError.missingIngredients
+            throw RecipesBookDataModelConvertibleError.missingVersion
         }
         guard let results = results else {
-            throw RecipeDataModelConvertibleError.missingThumbnail
+            throw RecipesBookDataModelConvertibleError.missingResults
         }
-        
-        var newResult: [RecipeDataModel] = []
-        
-        newResult = try results.compactMap { try $0.recipeDataModel() }
-        
         return RecipesBookDataModel(title: title, version: version, href: href, results: results)
     }
 }

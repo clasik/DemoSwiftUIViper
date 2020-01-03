@@ -20,7 +20,7 @@ final class RecipesBookInteractor {
         currentPage = 1
         pageSize = 50
         allRecipesLoaded = false
-        ingredients = "onion"
+        ingredients = "cheese"
     }
 }
 
@@ -29,8 +29,6 @@ extension RecipesBookInteractor: RecipesBookInteractorProtocol {
     func getCurrentRecipes() -> AnyPublisher<[RecipeDataModel], Error> {
         return self.dependencies.apiService.getRecipes(page: currentPage, ingredients: ingredients)
             .tryCompactMap { recipesBookResponseModel in
-                //recipeResponseModels in
-            //return try recipeResponseModels.compactMap { try $0.recipeDataModel() }
                 return try recipesBookResponseModel.recipesBookDataModel().results
         }.eraseToAnyPublisher()
     }
@@ -39,8 +37,6 @@ extension RecipesBookInteractor: RecipesBookInteractorProtocol {
         currentPage += 1
         return self.dependencies.apiService.getRecipes(page: currentPage, ingredients: ingredients)
             .tryCompactMap { recipesBookResponseModel in
-                //recipeResponseModels in
-            //return try recipeResponseModels.compactMap { try $0.recipeDataModel() }
             return try recipesBookResponseModel.recipesBookDataModel().results
         }.eraseToAnyPublisher()
     }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7386E51823BFCB07005A9562 /* RecipesBookDataModelConvertibleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386E51723BFCB07005A9562 /* RecipesBookDataModelConvertibleError.swift */; };
+		7386E51A23BFCB83005A9562 /* RecipesBookDataModelConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7386E51923BFCB83005A9562 /* RecipesBookDataModelConvertible.swift */; };
 		73A4E16423BFA68700213D1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4E16323BFA68700213D1D /* AppDelegate.swift */; };
 		73A4E16623BFA68700213D1D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4E16523BFA68700213D1D /* SceneDelegate.swift */; };
 		73A4E16A23BFA68C00213D1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A4E16923BFA68C00213D1D /* Assets.xcassets */; };
@@ -56,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7386E51723BFCB07005A9562 /* RecipesBookDataModelConvertibleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesBookDataModelConvertibleError.swift; sourceTree = "<group>"; };
+		7386E51923BFCB83005A9562 /* RecipesBookDataModelConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesBookDataModelConvertible.swift; sourceTree = "<group>"; };
 		73A4E16023BFA68700213D1D /* DemoSwiftUIViper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoSwiftUIViper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73A4E16323BFA68700213D1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73A4E16523BFA68700213D1D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -201,9 +205,9 @@
 		73A4E19C23BFA98100213D1D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				73A4E1BC23BFAFBB00213D1D /* APIServiceError.swift */,
 				73A4E1D123BFC38E00213D1D /* Recipe */,
 				73A4E1D023BFC38300213D1D /* RecipesBook */,
-				73A4E1BC23BFAFBB00213D1D /* APIServiceError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -230,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				73A4E1BA23BFAF8E00213D1D /* RecipeDataModelConvertible.swift */,
+				7386E51923BFCB83005A9562 /* RecipesBookDataModelConvertible.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -248,6 +253,7 @@
 				73A4E1CE23BFC36000213D1D /* RecipesBookDataModel.swift */,
 				73A4E1C623BFBFE800213D1D /* RecipesBookResponseModel.swift */,
 				73A4E1CC23BFC10B00213D1D /* RecipesBookResponseModel+RecipesBookDataModelConvertible.swift */,
+				7386E51723BFCB07005A9562 /* RecipesBookDataModelConvertibleError.swift */,
 			);
 			path = RecipesBook;
 			sourceTree = "<group>";
@@ -400,7 +406,9 @@
 				73A4E1B123BFAE0B00213D1D /* RecipesBookPresenter.swift in Sources */,
 				73A4E1CB23BFC07900213D1D /* RecipeResponseModel.swift in Sources */,
 				73A4E16423BFA68700213D1D /* AppDelegate.swift in Sources */,
+				7386E51A23BFCB83005A9562 /* RecipesBookDataModelConvertible.swift in Sources */,
 				73A4E1A723BFAC7B00213D1D /* RecipesBookDelegateProtocol.swift in Sources */,
+				7386E51823BFCB07005A9562 /* RecipesBookDataModelConvertibleError.swift in Sources */,
 				73A4E16623BFA68700213D1D /* SceneDelegate.swift in Sources */,
 				73A4E1A523BFAC6C00213D1D /* RecipesBookAction.swift in Sources */,
 				73A4E1BB23BFAF8E00213D1D /* RecipeDataModelConvertible.swift in Sources */,
