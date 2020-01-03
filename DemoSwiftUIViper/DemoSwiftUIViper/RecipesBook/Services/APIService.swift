@@ -12,7 +12,7 @@ final class APIService {
         return JSONDecoder()
     }()
     
-    func getRecipes(page: Int, ingredients: String) -> AnyPublisher<[RecipeResponseModel], Error> {
+    func getRecipes(page: Int, ingredients: String) -> AnyPublisher<RecipesBookResponseModel, Error> {
         let queryItemPage = URLQueryItem(name: "p", value: "\(page)")
         let queryItemIngredients = URLQueryItem(name: "i", value: ingredients)
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)
@@ -23,7 +23,7 @@ final class APIService {
         let urlRequest = URLRequest(url: url)
         return urlSession.dataTaskPublisher(for: urlRequest)
             .map { $0.data }
-            .decode(type: [RecipeResponseModel].self, decoder: jsonDecoder)
+            .decode(type: RecipesBookResponseModel.self, decoder: jsonDecoder)
             .eraseToAnyPublisher()
     }
 }

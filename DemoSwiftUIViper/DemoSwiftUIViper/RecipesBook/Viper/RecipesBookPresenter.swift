@@ -50,7 +50,6 @@ extension RecipesBookPresenter {
                 
             case .finished: break
                    
-                
             }
         }) { recipeDataModels in
             let recipeViewModels: [RecipeViewModel] = recipeDataModels.compactMap { recipeDataModel in

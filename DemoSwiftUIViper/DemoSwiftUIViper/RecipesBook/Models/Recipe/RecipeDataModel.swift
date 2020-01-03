@@ -1,6 +1,6 @@
 import Foundation
 
-struct RecipeDataModel {
+struct RecipeDataModel: Codable {
     let title: String
     let href: URL
     let ingredients: String

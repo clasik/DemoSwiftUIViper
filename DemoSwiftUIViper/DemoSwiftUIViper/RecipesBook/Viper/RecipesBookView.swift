@@ -10,7 +10,11 @@ struct RecipesBookView: View {
     
     var body: some View {
         NavigationView {
-            EmptyView()
+            List(presenter.recipeViewModels, rowContent: { recipeViewModel in
+                // NavigationLink(destination: RecipeDetailView(url: recipeViewModel.href)) {
+                Text(recipeViewModel.title)
+                // }
+            })
         }
         .onAppear {
             self.presenter.didReceiveEvent(.viewAppears)
