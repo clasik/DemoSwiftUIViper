@@ -1,14 +1,11 @@
 import Foundation
 
-protocol RecipesBookInteractorDependenciesProtocol: APIServiceProvider {
-    
-}
+protocol RecipesBookInteractorDependenciesProtocol: APIServiceProvider {}
 
 struct RecipesBookInteractorDependencies: RecipesBookInteractorDependenciesProtocol {
     let apiService: APIService
-       
-       init() {
-           apiService = APIService()
-       }
     
+    init() {
+        apiService = APIService()
+    }
 }

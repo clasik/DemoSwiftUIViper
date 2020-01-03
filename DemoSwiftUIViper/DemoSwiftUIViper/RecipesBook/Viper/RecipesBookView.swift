@@ -9,7 +9,15 @@ struct RecipesBookView: View {
     weak var delegate: RecipesBookDelegateProtocol?
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            EmptyView()
+        }
+        .onAppear {
+            self.presenter.didReceiveEvent(.viewAppears)
+        }
+        .onDisappear {
+            self.presenter.didReceiveEvent(.viewDisappears)
+        }
     }
 }
 
@@ -22,8 +30,10 @@ extension RecipesBookView: RecipesBookProtocol {
     
 }
 
+#if DEBUG
 struct RecipesBookView_Previews: PreviewProvider {
     static var previews: some View {
         RecipesBookView()
     }
 }
+#endif
