@@ -9,8 +9,8 @@ protocol RecipesBookPresenterProtocol: class {
 final class RecipesBookPresenter: NSObject, ObservableObject {
     private let dependencies: RecipesBookPresenterDependenciesProtocol
     private var interactor: RecipesBookInteractorProtocol
-    private var getCurrentRecipesCancellable: AnyCancellable?
-    private var getNextRecipesCancellable: AnyCancellable?
+    private var getCurrentRecipesCancellable: [AnyCancellable] = []
+    private var getNextRecipesCancellable: [AnyCancellable] = []
     
     @Published private(set) var recipeViewModels: [RecipeViewModel] = []
     
@@ -27,8 +27,12 @@ extension RecipesBookPresenter: RecipesBookPresenterProtocol {
         case .viewAppears:
             getCurrentRecipes()
         case .viewDisappears:
-            getCurrentRecipesCancellable?.cancel()
-            getNextRecipesCancellable?.cancel()
+            getCurrentRecipesCancellable.forEach({ anyCancellable in
+                anyCancellable.cancel()
+            })
+            getNextRecipesCancellable.forEach({ anyCancellable in
+                anyCancellable.cancel()
+            })
         }
     }
     
@@ -50,7 +54,7 @@ extension RecipesBookPresenter: RecipesBookPresenterProtocol {
 
 extension RecipesBookPresenter {
     private func getCurrentRecipes() {
-        getCurrentRecipesCancellable = interactor.getCurrentRecipes()
+        self.getCurrentRecipesCancellable.append(self.interactor.getCurrentRecipes()
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -69,15 +73,14 @@ extension RecipesBookPresenter {
                                            thumbnail: recipeDataModel.thumbnail)
                 }
                 self.recipeViewModels.append(contentsOf: recipeViewModels)
-        }
+        })
     }
     
     private func getNextRecipes() {
         guard !interactor.allRecipesLoaded else {
             return
         }
-        
-        getNextRecipesCancellable = interactor.getNextRecipes()
+        self.getNextRecipesCancellable.append( self.interactor.getNextRecipes()
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
@@ -97,6 +100,6 @@ extension RecipesBookPresenter {
                                            thumbnail: recipeDataModel.thumbnail)
                 }
                 self.recipeViewModels.append(contentsOf: recipeViewModels)
-        }
+        })        
     }
 }
