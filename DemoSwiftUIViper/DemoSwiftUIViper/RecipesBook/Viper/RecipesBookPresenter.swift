@@ -36,6 +36,14 @@ extension RecipesBookPresenter: RecipesBookPresenterProtocol {
         switch action {
         case .retry:
             getCurrentRecipes()
+        case .nextPage:
+            getNextRecipes()
+        case .updateIngredients(let ingredients):
+            self.interactor.ingredients = ingredients
+            self.interactor.currentPage = 1
+            self.interactor.allRecipesLoaded = false
+            self.recipeViewModels.removeAll()
+            getCurrentRecipes()
         }
     }
 }
@@ -43,46 +51,17 @@ extension RecipesBookPresenter: RecipesBookPresenterProtocol {
 extension RecipesBookPresenter {
     private func getCurrentRecipes() {
         getCurrentRecipesCancellable = interactor.getCurrentRecipes()
-        .receive(on: RunLoop.main)
-        .sink(receiveCompletion: { completion in
-            switch completion {
-            case .failure(let error): break
-                
-            case .finished: break
-                   
-            }
-        }) { recipeDataModels in
-            let recipeViewModels: [RecipeViewModel] = recipeDataModels.compactMap { recipeDataModel in
-                return RecipeViewModel(title: recipeDataModel.title,
-                                       href: recipeDataModel.href,
-                                       ingredients: recipeDataModel.ingredients,
-                                       thumbnail: recipeDataModel.thumbnail)
-            }
-            self.recipeViewModels.append(contentsOf: recipeViewModels)
-        }
-    }
-    
-    private func getNextRecipes() {
-        guard !interactor.allRecipesLoaded else {
-            return
-        }
-                
-        getNextRecipesCancellable = interactor.getNextRecipes()
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
-                    case .failure(let error):
-                        if let interactorError = error as? RecipesBookInteractorError, interactorError == .allRecipesLoaded {
-                            
-                        } else {
-                            
-                        }
-                    case .finished:
-                        break
+                case .failure(let error):
+                    if let interactorError = error as? RecipesBookInteractorError, interactorError == .allRecipesLoaded {
+                        self.interactor.allRecipesLoaded = true
+                    }
+                case .finished: break
                     
                 }
             }) { recipeDataModels in
-                self.interactor.allRecipesLoaded = recipeDataModels.count < self.interactor.pageSize
                 let recipeViewModels: [RecipeViewModel] = recipeDataModels.compactMap { recipeDataModel in
                     return RecipeViewModel(title: recipeDataModel.title,
                                            href: recipeDataModel.href,
@@ -90,6 +69,34 @@ extension RecipesBookPresenter {
                                            thumbnail: recipeDataModel.thumbnail)
                 }
                 self.recipeViewModels.append(contentsOf: recipeViewModels)
-            }
+        }
+    }
+    
+    private func getNextRecipes() {
+        guard !interactor.allRecipesLoaded else {
+            return
+        }
+        
+        getNextRecipesCancellable = interactor.getNextRecipes()
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    if let interactorError = error as? RecipesBookInteractorError, interactorError == .allRecipesLoaded {
+                        self.interactor.allRecipesLoaded = true
+                    }
+                case .finished:
+                    break
+                    
+                }
+            }) { recipeDataModels in
+                let recipeViewModels: [RecipeViewModel] = recipeDataModels.compactMap { recipeDataModel in
+                    return RecipeViewModel(title: recipeDataModel.title,
+                                           href: recipeDataModel.href,
+                                           ingredients: recipeDataModel.ingredients,
+                                           thumbnail: recipeDataModel.thumbnail)
+                }
+                self.recipeViewModels.append(contentsOf: recipeViewModels)
+        }
     }
 }

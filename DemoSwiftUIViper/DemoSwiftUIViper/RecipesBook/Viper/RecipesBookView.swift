@@ -8,22 +8,26 @@ struct RecipesBookView: View {
     @ObservedObject private var presenter = RecipesBookWireframe.makePresenter()
     weak var delegate: RecipesBookDelegateProtocol?
     
-    @State var name: String = ""
+    @State private var isLoading: Bool = false
+    @State var ingredients: String = ""
     
     var body: some View {
         NavigationView {
             VStack{
-                TextField("Filter by ingredients", text: $name, onCommit: {
-                    
-                })
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
+                TextField("filter_by_ingredients".localized, text: $ingredients, onCommit: {
+                    self.presenter.didTriggerAction(.updateIngredients(self.ingredients))
+                }).textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
                 List(presenter.recipeViewModels, rowContent: { recipeViewModel in
-                    // NavigationLink(destination: RecipeDetailView(url: recipeViewModel.href)) {
-                    Text(recipeViewModel.title)
-                    // }
+                    VStack{
+                        // NavigationLink(destination: RecipeDetailView(url: recipeViewModel.href)) {
+                        Text(recipeViewModel.title).onAppear {
+                            self.listItemAppears(recipeViewModel)
+                        }
+                        // }
+                    }
                 })
-            }.navigationBarTitle("Recipes")
+            }.navigationBarTitle("recipes".localized)
         }
         .onAppear {
             self.presenter.didReceiveEvent(.viewAppears)
@@ -32,8 +36,13 @@ struct RecipesBookView: View {
             self.presenter.didReceiveEvent(.viewDisappears)
         }
     }
+    
+    private func listItemAppears<Item: Identifiable>(_ item: Item) {
+        if presenter.recipeViewModels.isLastItem(item) {
+            self.presenter.didTriggerAction(.nextPage)
+        }
+    }
 }
-
 
 extension RecipesBookView: RecipesBookViewProtocol {
     
@@ -42,6 +51,7 @@ extension RecipesBookView: RecipesBookViewProtocol {
 extension RecipesBookView: RecipesBookProtocol {
     
 }
+
 
 #if DEBUG
 struct RecipesBookView_Previews: PreviewProvider {

@@ -2,12 +2,12 @@ import SwiftUI
 
 struct RecipeViewModel {
     let title: String
-    let href: URL
+    let href: String
     let ingredients: String
-    let thumbnail: URL
+    let thumbnail: String
 }
 
 extension RecipeViewModel: Identifiable {
-    var id: String { href.absoluteString }
+    var id: String { href }
 }
 

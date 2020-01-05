@@ -2,25 +2,29 @@ import Combine
 import Foundation
 
 protocol RecipesBookInteractorProtocol {
-    var pageSize: Int { get }
     var allRecipesLoaded: Bool { get set }
+    var currentPage: Int { get set }
+    var ingredients: String { get set }
+    var pageSize: Int { get }
+    
     func getCurrentRecipes() -> AnyPublisher<[RecipeDataModel], Error>
     func getNextRecipes() -> AnyPublisher<[RecipeDataModel], Error>
 }
 
 final class RecipesBookInteractor {
     private let dependencies: RecipesBookInteractorDependenciesProtocol
-    private var currentPage: Int
-    private var ingredients: String
     
-    let pageSize: Int
     var allRecipesLoaded: Bool
+    var currentPage: Int
+    var ingredients: String
+    let pageSize: Int
+    
     init(dependencies: RecipesBookInteractorDependenciesProtocol) {
         self.dependencies = dependencies
         currentPage = 1
         pageSize = 50
         allRecipesLoaded = false
-        ingredients = "cheese"
+        ingredients = ""
     }
 }
 

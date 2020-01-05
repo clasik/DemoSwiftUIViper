@@ -2,7 +2,7 @@ import Foundation
 
 struct RecipeDataModel: Codable {
     let title: String
-    let href: URL
+    let href: String
     let ingredients: String
-    let thumbnail: URL
+    let thumbnail: String
 }
