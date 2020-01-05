@@ -16,15 +16,16 @@ struct RecipesBookView: View {
             VStack{
                 TextField("filter_by_ingredients".localized, text: $ingredients, onCommit: {
                     self.presenter.didTriggerAction(.updateIngredients(self.ingredients))
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                 }).textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 List(presenter.recipeViewModels, rowContent: { recipeViewModel in
                     VStack{
-                        // NavigationLink(destination: RecipeDetailView(url: recipeViewModel.href)) {
-                        Text(recipeViewModel.title).onAppear {
-                            self.listItemAppears(recipeViewModel)
+                        NavigationLink(destination: RecipeDetailView(recipe: recipeViewModel)) {
+                            Text(recipeViewModel.title).onAppear {
+                                self.listItemAppears(recipeViewModel)
+                            }
                         }
-                        // }
                     }
                 })
             }.navigationBarTitle("recipes".localized)
@@ -38,7 +39,7 @@ struct RecipesBookView: View {
     }
     
     private func listItemAppears<Item: Identifiable>(_ item: Item) {
-        if presenter.recipeViewModels.isLastItem(item) {
+        if presenter.recipeViewModels.closeToLastItem(item) {
             self.presenter.didTriggerAction(.nextPage)
         }
     }

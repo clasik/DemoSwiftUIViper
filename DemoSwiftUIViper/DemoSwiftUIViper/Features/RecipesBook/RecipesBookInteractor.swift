@@ -44,6 +44,4 @@ extension RecipesBookInteractor: RecipesBookInteractorProtocol {
             return try recipesBookResponseModel.recipesBookDataModel().results
         }.eraseToAnyPublisher()
     }
-    
-    
 }

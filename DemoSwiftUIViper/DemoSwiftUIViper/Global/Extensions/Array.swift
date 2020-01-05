@@ -1,7 +1,7 @@
 import Foundation
 
 extension Array where Array.Element: Identifiable {
-    func isLastItem<Item: Identifiable>(_ item: Item) -> Bool {
+    func closeToLastItem<Item: Identifiable>(_ item: Item) -> Bool {
         guard !isEmpty else {
             return false
         }
@@ -11,6 +11,6 @@ extension Array where Array.Element: Identifiable {
         }
         
         let distance = self.distance(from: itemIndex, to: endIndex)
-        return distance == 1
+        return distance <= 5
     }
 }
