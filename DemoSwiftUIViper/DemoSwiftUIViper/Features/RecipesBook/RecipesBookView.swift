@@ -20,15 +20,17 @@ struct RecipesBookView: View {
                 }).textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 List(presenter.recipeViewModels, rowContent: { recipeViewModel in
-                    VStack{
-                        NavigationLink(destination: RecipeDetailView(recipe: recipeViewModel)) {
-                            RecipeCellView(recipe: recipeViewModel).onAppear {
-                                self.listItemAppears(recipeViewModel)
-                            }
+                    NavigationLink(destination: RecipeDetailView(recipe: recipeViewModel)) {
+                        RecipeCellView(recipe: recipeViewModel).onAppear {
+                            self.listItemAppears(recipeViewModel)
                         }
                     }
                 })
-            }.navigationBarTitle("recipes".localized)
+            }.navigationBarTitle("recipes".localized).navigationBarItems(trailing:
+                NavigationLink(destination: FavoriteRecipesView()) {
+                    Image(systemName: "heart.fill")
+                }
+            )
         }
         .onAppear {
             self.presenter.didReceiveEvent(.viewAppears)
