@@ -22,7 +22,7 @@ struct RecipesBookView: View {
                 List(presenter.recipeViewModels, rowContent: { recipeViewModel in
                     VStack{
                         NavigationLink(destination: RecipeDetailView(recipe: recipeViewModel)) {
-                            Text(recipeViewModel.title).onAppear {
+                            RecipeCellView(recipe: recipeViewModel).onAppear {
                                 self.listItemAppears(recipeViewModel)
                             }
                         }

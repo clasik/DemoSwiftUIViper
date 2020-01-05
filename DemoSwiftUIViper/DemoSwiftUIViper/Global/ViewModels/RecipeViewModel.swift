@@ -11,3 +11,9 @@ extension RecipeViewModel: Identifiable {
     var id: String { href }
 }
 
+extension RecipeViewModel {
+    var isFavourite: Bool{
+        return true
+    }
+}
+

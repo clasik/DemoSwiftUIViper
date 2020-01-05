@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		734C201923C23CE500B4BE72 /* RecipeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734C201823C23CE500B4BE72 /* RecipeCellView.swift */; };
+		734C201C23C23E4C00B4BE72 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 734C201B23C23E4C00B4BE72 /* URLImage */; };
 		73A4E16423BFA68700213D1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4E16323BFA68700213D1D /* AppDelegate.swift */; };
 		73A4E16623BFA68700213D1D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4E16523BFA68700213D1D /* SceneDelegate.swift */; };
 		73A4E16A23BFA68C00213D1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A4E16923BFA68C00213D1D /* Assets.xcassets */; };
@@ -59,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		734C201823C23CE500B4BE72 /* RecipeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCellView.swift; sourceTree = "<group>"; };
 		73A4E16023BFA68700213D1D /* DemoSwiftUIViper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoSwiftUIViper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73A4E16323BFA68700213D1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73A4E16523BFA68700213D1D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				734C201C23C23E4C00B4BE72 /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +128,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		734C201723C23CDB00B4BE72 /* RecipeCell */ = {
+			isa = PBXGroup;
+			children = (
+				734C201823C23CE500B4BE72 /* RecipeCellView.swift */,
+			);
+			path = RecipeCell;
+			sourceTree = "<group>";
+		};
 		73A4E15723BFA68700213D1D = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +285,7 @@
 		73EC817023C21AC500AAC63C /* RecipesBook */ = {
 			isa = PBXGroup;
 			children = (
+				734C201723C23CDB00B4BE72 /* RecipeCell */,
 				73EC817223C21AC500AAC63C /* RecipesBookAction.swift */,
 				73EC817123C21AC500AAC63C /* RecipesBookDelegateProtocol.swift */,
 				73EC817823C21AC500AAC63C /* RecipesBookEvent.swift */,
@@ -320,6 +333,9 @@
 			dependencies = (
 			);
 			name = DemoSwiftUIViper;
+			packageProductDependencies = (
+				734C201B23C23E4C00B4BE72 /* URLImage */,
+			);
 			productName = DemoSwiftUIViper;
 			productReference = 73A4E16023BFA68700213D1D /* DemoSwiftUIViper.app */;
 			productType = "com.apple.product-type.application";
@@ -392,6 +408,9 @@
 				Base,
 			);
 			mainGroup = 73A4E15723BFA68700213D1D;
+			packageReferences = (
+				734C201A23C23E4C00B4BE72 /* XCRemoteSwiftPackageReference "url-image" */,
+			);
 			productRefGroup = 73A4E16123BFA68700213D1D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -436,6 +455,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				734C201923C23CE500B4BE72 /* RecipeCellView.swift in Sources */,
 				73A4E16423BFA68700213D1D /* AppDelegate.swift in Sources */,
 				73EC818423C21AC500AAC63C /* String.swift in Sources */,
 				73EC818823C21AC500AAC63C /* RecipesBookAction.swift in Sources */,
@@ -780,6 +800,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		734C201A23C23E4C00B4BE72 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		734C201B23C23E4C00B4BE72 /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 734C201A23C23E4C00B4BE72 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 73A4E15823BFA68700213D1D /* Project object */;
 }
