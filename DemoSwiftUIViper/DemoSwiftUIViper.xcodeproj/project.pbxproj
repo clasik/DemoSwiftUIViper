@@ -34,6 +34,9 @@
 		73A4E1C723BFBFE800213D1D /* RecipesBookResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4E1C623BFBFE800213D1D /* RecipesBookResponseModel.swift */; };
 		73A4E1CD23BFC10B00213D1D /* RecipesBookResponseModel+RecipesBookDataModelConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4E1CC23BFC10B00213D1D /* RecipesBookResponseModel+RecipesBookDataModelConvertible.swift */; };
 		73A4E1CF23BFC36000213D1D /* RecipesBookDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A4E1CE23BFC36000213D1D /* RecipesBookDataModel.swift */; };
+		73EC815723C20B9100AAC63C /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EC815623C20B9100AAC63C /* Array.swift */; };
+		73EC815923C2183A00AAC63C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 73EC815823C2183A00AAC63C /* Localizable.strings */; };
+		73EC815B23C2189B00AAC63C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EC815A23C2189B00AAC63C /* String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +90,9 @@
 		73A4E1C623BFBFE800213D1D /* RecipesBookResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesBookResponseModel.swift; sourceTree = "<group>"; };
 		73A4E1CC23BFC10B00213D1D /* RecipesBookResponseModel+RecipesBookDataModelConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipesBookResponseModel+RecipesBookDataModelConvertible.swift"; sourceTree = "<group>"; };
 		73A4E1CE23BFC36000213D1D /* RecipesBookDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesBookDataModel.swift; sourceTree = "<group>"; };
+		73EC815623C20B9100AAC63C /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		73EC815823C2183A00AAC63C /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		73EC815A23C2189B00AAC63C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,9 +144,11 @@
 			isa = PBXGroup;
 			children = (
 				73A4E17123BFA68C00213D1D /* Info.plist */,
+				73EC815823C2183A00AAC63C /* Localizable.strings */,
 				73A4E16323BFA68700213D1D /* AppDelegate.swift */,
 				73A4E16523BFA68700213D1D /* SceneDelegate.swift */,
 				73A4E16923BFA68C00213D1D /* Assets.xcassets */,
+				73EC815523C20B8400AAC63C /* Extensions */,
 				73A4E16E23BFA68C00213D1D /* LaunchScreen.storyboard */,
 				73A4E16B23BFA68C00213D1D /* Preview Content */,
 				73A4E19A23BFA98100213D1D /* RecipesBook */,
@@ -257,6 +265,15 @@
 			path = Recipe;
 			sourceTree = "<group>";
 		};
+		73EC815523C20B8400AAC63C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				73EC815623C20B9100AAC63C /* Array.swift */,
+				73EC815A23C2189B00AAC63C /* String.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -362,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73A4E17023BFA68C00213D1D /* LaunchScreen.storyboard in Resources */,
+				73EC815923C2183A00AAC63C /* Localizable.strings in Resources */,
 				73A4E16D23BFA68C00213D1D /* Preview Assets.xcassets in Resources */,
 				73A4E16A23BFA68C00213D1D /* Assets.xcassets in Resources */,
 			);
@@ -394,6 +412,8 @@
 				73A4E1B123BFAE0B00213D1D /* RecipesBookPresenter.swift in Sources */,
 				73A4E16423BFA68700213D1D /* AppDelegate.swift in Sources */,
 				7386E51A23BFCB83005A9562 /* RecipesBookDataModelConvertible.swift in Sources */,
+				73EC815B23C2189B00AAC63C /* String.swift in Sources */,
+				73EC815723C20B9100AAC63C /* Array.swift in Sources */,
 				73A4E1A723BFAC7B00213D1D /* RecipesBookDelegateProtocol.swift in Sources */,
 				7386E51823BFCB07005A9562 /* RecipesBookDataModelConvertibleError.swift in Sources */,
 				73A4E16623BFA68700213D1D /* SceneDelegate.swift in Sources */,
