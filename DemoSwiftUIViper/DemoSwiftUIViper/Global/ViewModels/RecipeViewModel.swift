@@ -13,12 +13,11 @@ extension RecipeViewModel: Identifiable {
 }
 
 extension RecipeViewModel {
-    var isFavourite: Bool{
+    var isFavourite: Bool {
         return true
     }
-    
+
     var hasLactose: Bool {
         return ingredients.lowercased().contains("milk") || ingredients.lowercased().contains("cheese")
     }
 }
-

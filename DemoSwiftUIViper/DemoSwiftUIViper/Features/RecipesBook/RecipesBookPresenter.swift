@@ -11,9 +11,9 @@ final class RecipesBookPresenter: NSObject, ObservableObject {
     private var interactor: RecipesBookInteractorProtocol
     private var getCurrentRecipesCancellable: [AnyCancellable] = []
     private var getNextRecipesCancellable: [AnyCancellable] = []
-    
+
     @Published private(set) var recipeViewModels: [RecipeViewModel] = []
-    
+
     init(dependencies: RecipesBookPresenterDependenciesProtocol,
          interactor: RecipesBookInteractorProtocol) {
         self.dependencies = dependencies
@@ -21,7 +21,7 @@ final class RecipesBookPresenter: NSObject, ObservableObject {
     }
 }
 
-extension RecipesBookPresenter: RecipesBookPresenterProtocol {    
+extension RecipesBookPresenter: RecipesBookPresenterProtocol {
     func didReceiveEvent(_ event: RecipesBookEvent) {
         switch event {
         case .viewAppears:
@@ -35,7 +35,7 @@ extension RecipesBookPresenter: RecipesBookPresenterProtocol {
             })
         }
     }
-    
+
     func didTriggerAction(_ action: RecipesBookAction) {
         switch action {
         case .retry:
@@ -63,7 +63,7 @@ extension RecipesBookPresenter {
                         self.interactor.allRecipesLoaded = true
                     }
                 case .finished: break
-                    
+
                 }
             }) { recipeDataModels in
                 let recipeViewModels: [RecipeViewModel] = recipeDataModels.compactMap { recipeDataModel in
@@ -75,7 +75,7 @@ extension RecipesBookPresenter {
                 self.recipeViewModels.append(contentsOf: recipeViewModels)
         })
     }
-    
+
     private func getNextRecipes() {
         guard !interactor.allRecipesLoaded else {
             return
@@ -90,7 +90,7 @@ extension RecipesBookPresenter {
                     }
                 case .finished:
                     break
-                    
+
                 }
             }) { recipeDataModels in
                 let recipeViewModels: [RecipeViewModel] = recipeDataModels.compactMap { recipeDataModel in
@@ -100,6 +100,6 @@ extension RecipesBookPresenter {
                                            thumbnail: recipeDataModel.thumbnail)
                 }
                 self.recipeViewModels.append(contentsOf: recipeViewModels)
-        })        
+        })
     }
 }

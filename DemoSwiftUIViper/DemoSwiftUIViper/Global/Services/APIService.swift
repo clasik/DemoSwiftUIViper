@@ -11,7 +11,7 @@ final class APIService {
     private lazy var jsonDecoder: JSONDecoder = {
         return JSONDecoder()
     }()
-    
+
     func getRecipes(page: Int, ingredients: String) -> AnyPublisher<RecipesBookResponseModel, Error> {
         let queryItemPage = URLQueryItem(name: "p", value: "\(page)")
         var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)
@@ -29,12 +29,12 @@ final class APIService {
             .map { $0.data }
             .decode(type: RecipesBookResponseModel.self, decoder: jsonDecoder)
             .eraseToAnyPublisher()
-    }    
-    
+    }
+
     private var subscriptions = Set<AnyCancellable>()
-    
+
     func fetchMovies(page: Int, ingredients: String) -> Future<[RecipesBookResponseModel], Error> {
-        return Future<[RecipesBookResponseModel], Error> {[unowned self] promise in
+        return Future<[RecipesBookResponseModel], Error> {[unowned self] _ in
             let queryItemPage = URLQueryItem(name: "p", value: "\(page)")
             var urlComponents = URLComponents(url: self.baseURL, resolvingAgainstBaseURL: false)
             urlComponents?.queryItems = [queryItemPage]
@@ -44,9 +44,9 @@ final class APIService {
             }
             let urlRequest = URLRequest(url: urlComponents!.url!)
             debugPrint(urlRequest)
-            
+
             self.urlSession.dataTaskPublisher(for: urlRequest)
-                .tryMap { (data, response) -> Data in
+                .tryMap { (data, _) -> Data in
 //                    guard let httpResponse = response as? HTTPURLResponse, 200...299 ~= httpResponse.statusCode else {
 //                        //throw Fail<Any, String>(error: APIServiceError.couldNotCreateURL)//Error.responseError((response as? HTTPURLResponse)?.statusCode ?? 500)
 //                        
@@ -55,7 +55,7 @@ final class APIService {
             }
             .decode(type: RecipesBookResponseModel.self, decoder: self.jsonDecoder)
             .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { (completion) in
+            .sink(receiveCompletion: { (_) in
 //                if case let .failure(error) = completion {
 //                    switch error {
 //                    case let urlError as URLError:

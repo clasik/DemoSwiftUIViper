@@ -1,22 +1,22 @@
 import SwiftUI
 
 protocol RecipesBookViewProtocol: RecipesBookProtocol {
-    
+
 }
 
 struct RecipesBookView: View {
     @ObservedObject private var presenter = RecipesBookWireframe.makePresenter()
     weak var delegate: RecipesBookDelegateProtocol?
-    
+
     @State private var isLoading: Bool = false
     @State var ingredients: String = ""
-    
+
     var body: some View {
         NavigationView {
-            VStack{
+            VStack {
                 TextField("filter_by_ingredients".localized, text: $ingredients, onCommit: {
                     self.presenter.didTriggerAction(.updateIngredients(self.ingredients))
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }).textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 List(presenter.recipeViewModels, rowContent: { recipeViewModel in
@@ -39,7 +39,7 @@ struct RecipesBookView: View {
             self.presenter.didReceiveEvent(.viewDisappears)
         }
     }
-    
+
     private func listItemAppears<Item: Identifiable>(_ item: Item) {
         if presenter.recipeViewModels.closeToLastItem(item) {
             self.presenter.didTriggerAction(.nextPage)
@@ -48,13 +48,12 @@ struct RecipesBookView: View {
 }
 
 extension RecipesBookView: RecipesBookViewProtocol {
-    
+
 }
 
 extension RecipesBookView: RecipesBookProtocol {
-    
-}
 
+}
 
 #if DEBUG
 struct RecipesBookView_Previews: PreviewProvider {

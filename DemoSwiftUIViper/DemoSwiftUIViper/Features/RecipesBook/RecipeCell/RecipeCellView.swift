@@ -3,10 +3,10 @@ import URLImage
 
 struct RecipeCellView: View {
     let recipe: RecipeViewModel
-    
+
     var body: some View {
-        VStack{
-            ZStack() {
+        VStack {
+            ZStack {
                 URLImage(URL(string: self.recipe.thumbnail)!) { proxy in
                     proxy.image
                         .resizable()
@@ -23,7 +23,7 @@ struct RecipeCellView: View {
                     }
                 }
             }.clipped()
-            HStack{
+            HStack {
                 Text(self.recipe.title).font(.headline).lineLimit(nil)
                 Spacer()
                 Image(systemName: self.recipe.isFavourite ? "heart.fill" : "heart")
@@ -39,7 +39,6 @@ struct RecipeCellView: View {
         }
     }
 }
-
 
 #if DEBUG
 struct RecipeCellView_Previews: PreviewProvider {
