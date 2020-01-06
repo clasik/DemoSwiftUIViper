@@ -3,7 +3,8 @@ import URLImage
 
 struct RecipeCellView: View {
     let recipe: RecipeViewModel
-
+    let onFavouriteTapGasture: () -> Void
+    
     var body: some View {
         VStack {
             ZStack {
@@ -26,14 +27,12 @@ struct RecipeCellView: View {
             HStack {
                 Text(self.recipe.title).font(.headline).lineLimit(nil)
                 Spacer()
-                Image(systemName: self.recipe.isFavourite ? "heart.fill" : "heart")
+                Image(systemName: self.recipe.favourite ? "heart.fill" : "heart")
                     .foregroundColor(Color.white)
                     .padding()
                     .background(Color.red)
                     .cornerRadius(CGFloat(40))
-                    .onTapGesture {
-                        debugPrint("Favorite")
-                }
+                    .onTapGesture(perform: onFavouriteTapGasture)
             }
             Text(self.recipe.ingredients).lineLimit(nil)
         }
@@ -43,8 +42,10 @@ struct RecipeCellView: View {
 #if DEBUG
 struct RecipeCellView_Previews: PreviewProvider {
     static var previews: some View {
-        let recipe = RecipeViewModel(title: "", href: "", ingredients: "", thumbnail: "")
-        return RecipeCellView(recipe: recipe)
+        let recipe = RecipeViewModel(title: "", href: "", ingredients: "", thumbnail: "", favourite: false, hasLactose: false)
+        return RecipeCellView(recipe: recipe, onFavouriteTapGasture: {
+            
+        })
     }
 }
 #endif

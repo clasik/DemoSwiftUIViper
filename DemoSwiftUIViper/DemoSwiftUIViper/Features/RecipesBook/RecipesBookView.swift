@@ -8,9 +8,8 @@ struct RecipesBookView: View {
     @ObservedObject private var presenter = RecipesBookWireframe.makePresenter()
     weak var delegate: RecipesBookDelegateProtocol?
 
-    @State private var isLoading: Bool = false
     @State var ingredients: String = ""
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -21,13 +20,15 @@ struct RecipesBookView: View {
                     .padding()
                 List(presenter.recipeViewModels, rowContent: { recipeViewModel in
                     NavigationLink(destination: RecipeDetailView(recipe: recipeViewModel)) {
-                        RecipeCellView(recipe: recipeViewModel).onAppear {
+                        RecipeCellView(recipe: recipeViewModel, onFavouriteTapGasture: {
+                             self.makeFavourite(recipeViewModel)
+                        }).onAppear {
                             self.listItemAppears(recipeViewModel)
                         }
                     }
                 })
             }.navigationBarTitle("recipes".localized).navigationBarItems(trailing:
-                NavigationLink(destination: FavoriteRecipesView()) {
+                NavigationLink(destination: FavouriteRecipesView()) {
                     Image(systemName: "heart.fill")
                 }
             )
@@ -43,6 +44,12 @@ struct RecipesBookView: View {
     private func listItemAppears<Item: Identifiable>(_ item: Item) {
         if presenter.recipeViewModels.closeToLastItem(item) {
             self.presenter.didTriggerAction(.nextPage)
+        }
+    }
+    
+    private func makeFavourite<Item: Identifiable>(_ item: Item) {
+        if let item = item as? RecipeViewModel {
+            self.presenter.didTriggerAction(.makeFavourite(item))
         }
     }
 }

@@ -6,18 +6,10 @@ struct RecipeViewModel {
     let href: String
     let ingredients: String
     let thumbnail: String
+    var favourite: Bool
+    let hasLactose: Bool
 }
 
 extension RecipeViewModel: Identifiable {
     var id: String { href }
-}
-
-extension RecipeViewModel {
-    var isFavourite: Bool {
-        return true
-    }
-
-    var hasLactose: Bool {
-        return ingredients.lowercased().contains("milk") || ingredients.lowercased().contains("cheese")
-    }
 }

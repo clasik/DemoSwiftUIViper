@@ -11,9 +11,9 @@ final class RecipesBookPresenter: NSObject, ObservableObject {
     private var interactor: RecipesBookInteractorProtocol
     private var getCurrentRecipesCancellable: [AnyCancellable] = []
     private var getNextRecipesCancellable: [AnyCancellable] = []
-
+    
     @Published private(set) var recipeViewModels: [RecipeViewModel] = []
-
+    
     init(dependencies: RecipesBookPresenterDependenciesProtocol,
          interactor: RecipesBookInteractorProtocol) {
         self.dependencies = dependencies
@@ -35,11 +35,13 @@ extension RecipesBookPresenter: RecipesBookPresenterProtocol {
             })
         }
     }
-
+    
     func didTriggerAction(_ action: RecipesBookAction) {
         switch action {
         case .retry:
             getCurrentRecipes()
+        case .makeFavourite(let recipe):
+            makeFavourite(recipe: recipe)
         case .nextPage:
             getNextRecipes()
         case .updateIngredients(let ingredients):
@@ -63,19 +65,21 @@ extension RecipesBookPresenter {
                         self.interactor.allRecipesLoaded = true
                     }
                 case .finished: break
-
+                    
                 }
             }) { recipeDataModels in
-                let recipeViewModels: [RecipeViewModel] = recipeDataModels.compactMap { recipeDataModel in
+                let recipeViewModels: [RecipeViewModel] = recipeDataModels.compactMap { recipeDataModel in                    
                     return RecipeViewModel(title: recipeDataModel.title,
                                            href: recipeDataModel.href,
                                            ingredients: recipeDataModel.ingredients,
-                                           thumbnail: recipeDataModel.thumbnail)
+                                           thumbnail: recipeDataModel.thumbnail,
+                                           favourite: self.interactor.checkIsFavourite(recipe: recipeDataModel),
+                                           hasLactose: recipeDataModel.ingredients.lowercased().contains("milk") || recipeDataModel.ingredients.lowercased().contains("cheese"))
                 }
                 self.recipeViewModels.append(contentsOf: recipeViewModels)
         })
     }
-
+    
     private func getNextRecipes() {
         guard !interactor.allRecipesLoaded else {
             return
@@ -90,16 +94,34 @@ extension RecipesBookPresenter {
                     }
                 case .finished:
                     break
-
+                    
                 }
             }) { recipeDataModels in
                 let recipeViewModels: [RecipeViewModel] = recipeDataModels.compactMap { recipeDataModel in
                     return RecipeViewModel(title: recipeDataModel.title,
                                            href: recipeDataModel.href,
                                            ingredients: recipeDataModel.ingredients,
-                                           thumbnail: recipeDataModel.thumbnail)
+                                           thumbnail: recipeDataModel.thumbnail,
+                                           favourite: self.interactor.checkIsFavourite(recipe: recipeDataModel),
+                                           hasLactose: recipeDataModel.ingredients.lowercased().contains("milk") || recipeDataModel.ingredients.lowercased().contains("cheese"))
                 }
                 self.recipeViewModels.append(contentsOf: recipeViewModels)
         })
+    }
+    
+    private func makeFavourite(recipe: RecipeViewModel){
+        self.interactor.makeFavourite(recipe: RecipeDataModel(title: recipe.title,
+                                                             href: recipe.href,
+                                                             ingredients: recipe.ingredients,
+                                                             thumbnail: recipe.thumbnail))
+        if let index = self.recipeViewModels.firstIndex(where: { $0.title == recipe.title}) {
+            let newRecipe = RecipeViewModel(title: recipe.title,
+                                            href: recipe.href,
+                                            ingredients: recipe.ingredients,
+                                            thumbnail: recipe.thumbnail,
+                                            favourite: !recipe.favourite,
+                                            hasLactose: recipe.hasLactose)
+            self.recipeViewModels[index] = newRecipe
+        }
     }
 }
