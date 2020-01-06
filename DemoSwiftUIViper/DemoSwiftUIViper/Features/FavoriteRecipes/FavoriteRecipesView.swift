@@ -2,13 +2,13 @@ import SwiftUI
 import CoreData
 
 protocol FavouriteRecipesViewProtocol: FavouriteRecipesProtocol {
-    
+
 }
 
 struct FavouriteRecipesView: View {
     @ObservedObject private var presenter = FavouriteRecipesWireframe.makePresenter()
     weak var delegate: FavouriteRecipesDelegateProtocol?
-    
+
     var body: some View {
         List(presenter.recipeViewModels, rowContent: { recipeViewModel in
             NavigationLink(destination: RecipeDetailView(recipe: recipeViewModel)) {
@@ -26,7 +26,7 @@ struct FavouriteRecipesView: View {
             self.presenter.didReceiveEvent(.viewDisappears)
         }
     }
-    
+
     private func makeFavourite<Item: Identifiable>(_ item: Item) {
         if let item = item as? RecipeViewModel {
            self.presenter.didTriggerAction(.makeFavourite(item))
@@ -35,11 +35,11 @@ struct FavouriteRecipesView: View {
 }
 
 extension FavouriteRecipesView: FavouriteRecipesViewProtocol {
-    
+
 }
 
 extension FavouriteRecipesView: FavouriteRecipesProtocol {
-    
+
 }
 
 #if DEBUG

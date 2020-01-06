@@ -4,7 +4,7 @@ import URLImage
 struct RecipeCellView: View {
     let recipe: RecipeViewModel
     let onFavouriteTapGasture: () -> Void
-    
+
     var body: some View {
         VStack {
             ZStack {
@@ -13,14 +13,14 @@ struct RecipeCellView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                 }.frame(height: 150)
-                GeometryReader { g in
+                GeometryReader { geometry in
                     if self.recipe.hasLactose {
                         Text("has_lactose".localized)
                             .foregroundColor(Color.white)
                             .padding(EdgeInsets(top: 4, leading: 20, bottom: 4, trailing: 20))
                             .background(Color.red)
                             .rotationEffect(Angle(degrees: 45))
-                            .position(x: g.size.width-35, y: 35)
+                            .position(x: geometry.size.width-35, y: 35)
                     }
                 }
             }.clipped()
@@ -42,9 +42,14 @@ struct RecipeCellView: View {
 #if DEBUG
 struct RecipeCellView_Previews: PreviewProvider {
     static var previews: some View {
-        let recipe = RecipeViewModel(title: "", href: "", ingredients: "", thumbnail: "", favourite: false, hasLactose: false)
+        let recipe = RecipeViewModel(title: "",
+                                     href: "",
+                                     ingredients: "",
+                                     thumbnail: "",
+                                     favourite: false,
+                                     hasLactose: false)
         return RecipeCellView(recipe: recipe, onFavouriteTapGasture: {
-            
+
         })
     }
 }

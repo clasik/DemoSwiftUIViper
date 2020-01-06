@@ -22,8 +22,8 @@ final class CoreDataService {
         }
         return nil
     }
-    
-    func checkIsFavourite(recipe: RecipeDataModel) -> Bool{
+
+    func checkIsFavourite(recipe: RecipeDataModel) -> Bool {
         guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
             fatalError("Unable to read managed object context.")
         }
@@ -37,30 +37,30 @@ final class CoreDataService {
         }
         return false
     }
-    
+
     func makeFavourite(recipe: RecipeDataModel) {
         guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
             fatalError("Unable to read managed object context.")
         }
-        if (checkIsFavourite(recipe: recipe)) {
+        if checkIsFavourite(recipe: recipe) {
            _ = deleteRecipe(recipe: recipe)
             return
         }
-        
+
         let newRecipe = Recipe(context: context)
         newRecipe.title = recipe.title
         newRecipe.href = recipe.href
         newRecipe.thumbnail = recipe.thumbnail
         newRecipe.ingredients = recipe.ingredients
-        
+
         do {
             try context.save()
         } catch {
             debugPrint(error)
         }
     }
-    
-    func deleteRecipe(recipe: RecipeDataModel) -> Bool{
+
+    func deleteRecipe(recipe: RecipeDataModel) -> Bool {
         guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else {
             fatalError("Unable to read managed object context.")
         }
@@ -69,7 +69,9 @@ final class CoreDataService {
         do {
             let result = try context.fetch(fetchRequest)
             result.forEach { object in
-                context.delete(object as! NSManagedObject)
+                if let object = object as? NSManagedObject {
+                    context.delete(object)
+                }
             }
             try context.save()
             return result.count > 0

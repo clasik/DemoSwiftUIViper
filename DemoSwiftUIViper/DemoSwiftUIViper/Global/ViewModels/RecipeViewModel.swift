@@ -10,6 +10,7 @@ struct RecipeViewModel {
     let hasLactose: Bool
 }
 
+// swiftlint:disable identifier_name
 extension RecipeViewModel: Identifiable {
     var id: String { href }
 }

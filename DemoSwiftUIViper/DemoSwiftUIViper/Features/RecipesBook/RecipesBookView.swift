@@ -9,13 +9,14 @@ struct RecipesBookView: View {
     weak var delegate: RecipesBookDelegateProtocol?
 
     @State var ingredients: String = ""
-    
+
     var body: some View {
         NavigationView {
             VStack {
                 TextField("filter_by_ingredients".localized, text: $ingredients, onCommit: {
                     self.presenter.didTriggerAction(.updateIngredients(self.ingredients))
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                                    to: nil, from: nil, for: nil)
                 }).textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 List(presenter.recipeViewModels, rowContent: { recipeViewModel in
@@ -46,7 +47,7 @@ struct RecipesBookView: View {
             self.presenter.didTriggerAction(.nextPage)
         }
     }
-    
+
     private func makeFavourite<Item: Identifiable>(_ item: Item) {
         if let item = item as? RecipeViewModel {
             self.presenter.didTriggerAction(.makeFavourite(item))

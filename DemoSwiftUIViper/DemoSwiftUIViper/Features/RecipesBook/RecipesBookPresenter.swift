@@ -11,9 +11,9 @@ final class RecipesBookPresenter: NSObject, ObservableObject {
     private var interactor: RecipesBookInteractorProtocol
     private var getCurrentRecipesCancellable: [AnyCancellable] = []
     private var getNextRecipesCancellable: [AnyCancellable] = []
-    
+
     @Published private(set) var recipeViewModels: [RecipeViewModel] = []
-    
+
     init(dependencies: RecipesBookPresenterDependenciesProtocol,
          interactor: RecipesBookInteractorProtocol) {
         self.dependencies = dependencies
@@ -35,7 +35,7 @@ extension RecipesBookPresenter: RecipesBookPresenterProtocol {
             })
         }
     }
-    
+
     func didTriggerAction(_ action: RecipesBookAction) {
         switch action {
         case .retry:
@@ -54,32 +54,40 @@ extension RecipesBookPresenter: RecipesBookPresenterProtocol {
     }
 }
 
+// swiftlint:disable multiple_closures_with_trailing_closure
 extension RecipesBookPresenter {
+
+    private func getRecipeViewModels(from recipeDataModels: [RecipeDataModel]) -> [RecipeViewModel] {
+        return recipeDataModels.compactMap { recipeDataModel in
+            return RecipeViewModel(title: recipeDataModel.title,
+                                   href: recipeDataModel.href,
+                                   ingredients: recipeDataModel.ingredients,
+                                   thumbnail: recipeDataModel.thumbnail,
+                                   favourite: self.interactor.checkIsFavourite(recipe: recipeDataModel),
+                                   hasLactose: recipeDataModel.ingredients.lowercased().contains("milk") ||
+                                    recipeDataModel.ingredients.lowercased().contains("cheese"))
+        }
+
+    }
+
     private func getCurrentRecipes() {
         self.getCurrentRecipesCancellable.append(self.interactor.getCurrentRecipes()
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    if let interactorError = error as? RecipesBookInteractorError, interactorError == .allRecipesLoaded {
+                    if let interactorError = error as? RecipesBookInteractorError,
+                        interactorError == .allRecipesLoaded {
                         self.interactor.allRecipesLoaded = true
                     }
                 case .finished: break
-                    
+
                 }
             }) { recipeDataModels in
-                let recipeViewModels: [RecipeViewModel] = recipeDataModels.compactMap { recipeDataModel in                    
-                    return RecipeViewModel(title: recipeDataModel.title,
-                                           href: recipeDataModel.href,
-                                           ingredients: recipeDataModel.ingredients,
-                                           thumbnail: recipeDataModel.thumbnail,
-                                           favourite: self.interactor.checkIsFavourite(recipe: recipeDataModel),
-                                           hasLactose: recipeDataModel.ingredients.lowercased().contains("milk") || recipeDataModel.ingredients.lowercased().contains("cheese"))
-                }
-                self.recipeViewModels.append(contentsOf: recipeViewModels)
+                self.recipeViewModels.append(contentsOf: self.getRecipeViewModels(from: recipeDataModels))
         })
     }
-    
+
     private func getNextRecipes() {
         guard !interactor.allRecipesLoaded else {
             return
@@ -89,31 +97,24 @@ extension RecipesBookPresenter {
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    if let interactorError = error as? RecipesBookInteractorError, interactorError == .allRecipesLoaded {
+                    if let interactorError = error as? RecipesBookInteractorError,
+                        interactorError == .allRecipesLoaded {
                         self.interactor.allRecipesLoaded = true
                     }
                 case .finished:
                     break
-                    
+
                 }
             }) { recipeDataModels in
-                let recipeViewModels: [RecipeViewModel] = recipeDataModels.compactMap { recipeDataModel in
-                    return RecipeViewModel(title: recipeDataModel.title,
-                                           href: recipeDataModel.href,
-                                           ingredients: recipeDataModel.ingredients,
-                                           thumbnail: recipeDataModel.thumbnail,
-                                           favourite: self.interactor.checkIsFavourite(recipe: recipeDataModel),
-                                           hasLactose: recipeDataModel.ingredients.lowercased().contains("milk") || recipeDataModel.ingredients.lowercased().contains("cheese"))
-                }
-                self.recipeViewModels.append(contentsOf: recipeViewModels)
+                self.recipeViewModels.append(contentsOf: self.getRecipeViewModels(from: recipeDataModels))
         })
     }
-    
-    private func makeFavourite(recipe: RecipeViewModel){
+
+    private func makeFavourite(recipe: RecipeViewModel) {
         self.interactor.makeFavourite(recipe: RecipeDataModel(title: recipe.title,
-                                                             href: recipe.href,
-                                                             ingredients: recipe.ingredients,
-                                                             thumbnail: recipe.thumbnail))
+                                                              href: recipe.href,
+                                                              ingredients: recipe.ingredients,
+                                                              thumbnail: recipe.thumbnail))
         if let index = self.recipeViewModels.firstIndex(where: { $0.title == recipe.title}) {
             let newRecipe = RecipeViewModel(title: recipe.title,
                                             href: recipe.href,
