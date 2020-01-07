@@ -6,11 +6,15 @@ protocol APIServiceProvider {
 }
 
 final class APIService {
-    private let baseURL = URL(string: "http://www.recipepuppy.com/api/")!
+    private let baseURL: URL
     private let urlSession: URLSession = .shared
     private lazy var jsonDecoder: JSONDecoder = {
         return JSONDecoder()
     }()
+    
+    init(url: URL = URL(string: "http://www.recipepuppy.com/api/")!){
+        self.baseURL = url
+    }
 
     func getRecipes(page: Int, ingredients: String) -> AnyPublisher<RecipesBookResponseModel, Error> {
         let queryItemPage = URLQueryItem(name: "p", value: "\(page)")

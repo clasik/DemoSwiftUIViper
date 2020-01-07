@@ -92,7 +92,7 @@ extension RecipesBookPresenter {
         guard !interactor.allRecipesLoaded else {
             return
         }
-        self.getNextRecipesCancellable.append( self.interactor.getNextRecipes()
+        self.getNextRecipesCancellable.append(self.interactor.getNextRecipes()
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
