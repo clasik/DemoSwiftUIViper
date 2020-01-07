@@ -5,12 +5,12 @@
 - VIPER: 
 - SwiftUI:
 - Combine:
+- SnapshotTest:
 
 ### Another architecture alternative I considered is MVVM, easier and simpler of implement
 
 
 ### I would improve if I had more time:
-- Snapshop Test
-- CI
+- Improve Unit Tests
 - Integrate Sourcery for AutoMockable protocols
 - API Server Mock Responses
