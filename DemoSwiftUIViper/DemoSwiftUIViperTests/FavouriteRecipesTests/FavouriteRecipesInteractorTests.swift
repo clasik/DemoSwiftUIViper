@@ -19,8 +19,9 @@ class FavouriteRecipesInteractorTests: XCTestCase {
     }
     
     func testInteractor() {
-        sut.makeFavourite(recipe: rdm)
-        XCTAssertTrue(sut.checkIsFavourite(recipe: rdm))
+        let coreDataService = CoreDataService()
+        coreDataService.makeFavourite(recipe: rdm)
+        
         XCTAssertTrue(sut.getRecipes().count > 0)
     }
     

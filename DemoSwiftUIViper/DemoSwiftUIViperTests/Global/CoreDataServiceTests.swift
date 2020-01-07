@@ -17,7 +17,7 @@ class CoreDataServiceTests: XCTestCase {
     }
     
     func testDBRecipes() {
-        sut.deleteRecipe(recipe: rdm)
+        _ = sut.deleteRecipe(recipe: rdm)
         sut.makeFavourite(recipe: rdm)
         XCTAssertTrue((sut.getRecipes()?.reversed().count)! > 0)
         XCTAssertTrue(sut.checkIsFavourite(recipe: rdm))

@@ -21,34 +21,8 @@ class RecipesBookPresenterTests: XCTestCase {
     }
     
     func testEventsPresenter() {
-        
         sut.didReceiveEvent(.viewAppears)
-        
-//        let publisher = sut.getCurrentRecipes()
-//        let validTest = evalValidResponseTest(publisher: publisher)
-//        wait(for: validTest.expectations, timeout:3)
-//        validTest.cancellable?.cancel()
-        
-        
-        sut.didReceiveEvent(.viewDisappears)
-        
-        do {
-            sleep(2)
-
-            var cancellableSet = Set<AnyCancellable>()
-//            sut.$recipeViewModels.sink(receiveValue: { values in
-//                //XCTAssertTrue(values.count > 0)
-//                XCTAssertTrue(self.sut.recipeViewModels.count > 0)
-//            })
-//                .store(in: &cancellableSet)
-            
-            sut.$recipeViewModels
-                .sink(receiveCompletion: { values in
-                    XCTAssertTrue(self.sut.recipeViewModels.count > 0)
-                }) { recipeDataModels in
-                    XCTAssertTrue(recipeDataModels.count > 0)
-            }.store(in: &cancellableSet)
-        }
+        sut.didReceiveEvent(.viewDisappears)                
     }
     
     func testActionsPresenter() {
