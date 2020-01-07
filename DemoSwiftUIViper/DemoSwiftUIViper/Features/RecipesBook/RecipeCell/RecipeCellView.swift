@@ -8,11 +8,13 @@ struct RecipeCellView: View {
     var body: some View {
         VStack {
             ZStack {
-                URLImage(URL(string: self.recipe.thumbnail)!) { proxy in
-                    proxy.image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                }.frame(height: 150)
+                if !self.recipe.thumbnail.isEmpty {
+                    URLImage(URL(string: self.recipe.thumbnail)!) { proxy in
+                        proxy.image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    }.frame(height: 150)
+                }
                 GeometryReader { geometry in
                     if self.recipe.hasLactose {
                         Text("has_lactose".localized)
@@ -21,6 +23,7 @@ struct RecipeCellView: View {
                             .background(Color.red)
                             .rotationEffect(Angle(degrees: 45))
                             .position(x: geometry.size.width-35, y: 35)
+                            .accessibility(identifier: "Has lactose")
                     }
                 }
             }.clipped()
@@ -49,7 +52,7 @@ struct RecipeCellView_Previews: PreviewProvider {
                                      favourite: false,
                                      hasLactose: false)
         return RecipeCellView(recipe: recipe, onFavouriteTapGasture: {
-
+            
         })
     }
 }
