@@ -4,7 +4,7 @@ import URLImage
 struct RecipeCellView: View {
     let recipe: RecipeViewModel
     let onFavouriteTapGasture: () -> Void
-
+    
     var body: some View {
         VStack {
             ZStack {
