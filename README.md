@@ -1,5 +1,5 @@
 # DemoSwiftUIViper
-[![Build Status](https://travis-ci.com/clasik/DemoSwiftUIViper.svg?branch=master)
+![Build Status](https://travis-ci.com/clasik/DemoSwiftUIViper.svg?branch=master)
 
 ### I chose this configuration architecture:
 - VIPER: 
