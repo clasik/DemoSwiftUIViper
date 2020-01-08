@@ -6,31 +6,35 @@ import SwiftUI
 @testable import DemoSwiftUIViper
 
 class RecipeCellViewTests: XCTestCase {
-    
+    let title = "Title"
+    let href = "http://allrecipes.com/Recipe/Ginger-Champagne/Detail.aspx"
+    let ingredients = "Ingredients"
+    let thumbnail = "http://img.recipepuppy.com/285514.jpg"
+
     override func setUp() {
         super.setUp()
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
-    
+
     func testBodyExists() {
-        let sut = RecipeCellView(recipe: RecipeViewModel(title: "Title",
-                                                         href: "http://allrecipes.com/Recipe/Ginger-Champagne/Detail.aspx",
-                                                         ingredients: "Ingredients",
-                                                         thumbnail: "http://img.recipepuppy.com/285514.jpg",
+        let sut = RecipeCellView(recipe: RecipeViewModel(title: title,
+                                                         href: href,
+                                                         ingredients: ingredients,
+                                                         thumbnail: thumbnail,
                                                          favourite: false,
                                                          hasLactose: false), onFavouriteTapGasture: {
         })
         XCTAssertNotNil(sut.body)
     }
-    
-    func testSnapShotWithoutLactose(){
-        let sut = RecipeCellView(recipe: RecipeViewModel(title: "Title",
-                                                         href: "http://allrecipes.com/Recipe/Ginger-Champagne/Detail.aspx",
-                                                         ingredients: "Ingredients",
-                                                         thumbnail: "http://img.recipepuppy.com/285514.jpg",
+
+    func testSnapShotWithoutLactose() {
+        let sut = RecipeCellView(recipe: RecipeViewModel(title: title,
+                                                         href: href,
+                                                         ingredients: ingredients,
+                                                         thumbnail: thumbnail,
                                                          favourite: false,
                                                          hasLactose: false), onFavouriteTapGasture: {
         })
@@ -49,12 +53,12 @@ class RecipeCellViewTests: XCTestCase {
                            line: #line)
         }
     }
-    
-    func testSnapShotWithLactose(){
-        let sut = RecipeCellView(recipe: RecipeViewModel(title: "Title",
-                                                         href: "http://allrecipes.com/Recipe/Ginger-Champagne/Detail.aspx",
-                                                         ingredients: "Ingredients",
-                                                         thumbnail: "http://img.recipepuppy.com/285514.jpg",
+
+    func testSnapShotWithLactose() {
+        let sut = RecipeCellView(recipe: RecipeViewModel(title: title,
+                                                         href: href,
+                                                         ingredients: ingredients,
+                                                         thumbnail: thumbnail,
                                                          favourite: true,
                                                          hasLactose: true), onFavouriteTapGasture: {
         })
@@ -73,5 +77,5 @@ class RecipeCellViewTests: XCTestCase {
                            line: #line)
         }
     }
-    
+
 }

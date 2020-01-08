@@ -11,8 +11,8 @@ final class APIService {
     private lazy var jsonDecoder: JSONDecoder = {
         return JSONDecoder()
     }()
-    
-    init(url: URL = URL(string: "http://www.recipepuppy.com/api/")!){
+
+    init(url: URL = URL(string: "http://www.recipepuppy.com/api/")!) {
         self.baseURL = url
     }
 

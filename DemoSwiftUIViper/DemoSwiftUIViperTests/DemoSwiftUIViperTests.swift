@@ -4,7 +4,7 @@ import XCTest
 class DemoSwiftUIViperTests: XCTestCase {
 
     func testExample() {
-        
+
     }
-    
+
 }

@@ -6,7 +6,7 @@ struct MockRecipesBookInteractorDependencies: RecipesBookInteractorDependenciesP
     let coreDataService: CoreDataService
 
     class Foo {}
-    
+
     init() {
         let bundle = Bundle(for: MockRecipesBookInteractorDependencies.Foo.self)
         let path = bundle.path(forResource: "MockRecipesBook", ofType: "json")
