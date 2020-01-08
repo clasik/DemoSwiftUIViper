@@ -11,7 +11,7 @@ struct FavouriteRecipesWireframe: FavouriteRecipesWireframeProtocol {
 
         let presenterDependencies = FavouriteRecipesPresenterDependencies()
         let presenter = FavouriteRecipesPresenter(dependencies: presenterDependencies,
-                                             interactor: interactor)
+                                                  interactor: interactor)
         return presenter
     }
 }

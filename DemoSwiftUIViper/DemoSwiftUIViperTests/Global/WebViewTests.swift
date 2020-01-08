@@ -1,8 +1,7 @@
-import XCTest
 @testable import DemoSwiftUIViper
+import XCTest
 
 class WebViewTests: XCTestCase {
-
     var sut: WebView!
 
     override func setUp() {
@@ -18,5 +17,4 @@ class WebViewTests: XCTestCase {
     func testBodyExists() {
         XCTAssertNotNil(sut)
     }
-
 }

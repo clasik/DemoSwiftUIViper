@@ -1,9 +1,8 @@
-import XCTest
 import Combine
 @testable import DemoSwiftUIViper
+import XCTest
 
 class RecipesBookPresenterTests: XCTestCase {
-
     var sut: RecipesBookPresenter!
     var interactor: RecipesBookInteractor!
 

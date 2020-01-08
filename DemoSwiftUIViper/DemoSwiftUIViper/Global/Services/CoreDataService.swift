@@ -1,7 +1,7 @@
 import Combine
+import CoreData
 import Foundation
 import UIKit
-import CoreData
 
 protocol CoreDataServiceProvider {
     var coreDataService: CoreDataService { get }
@@ -43,7 +43,7 @@ final class CoreDataService {
             fatalError("Unable to read managed object context.")
         }
         if checkIsFavourite(recipe: recipe) {
-           _ = deleteRecipe(recipe: recipe)
+            _ = deleteRecipe(recipe: recipe)
             return
         }
 

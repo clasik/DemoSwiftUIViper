@@ -1,8 +1,7 @@
-import XCTest
 @testable import DemoSwiftUIViper
+import XCTest
 
 class RecipesBookWireframeTests: XCTestCase {
-
     var sut: RecipesBookWireframe!
 
     override func setUp() {

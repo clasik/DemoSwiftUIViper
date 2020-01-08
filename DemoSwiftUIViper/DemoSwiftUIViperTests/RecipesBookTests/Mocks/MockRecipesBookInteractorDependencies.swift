@@ -1,5 +1,5 @@
-import Foundation
 @testable import DemoSwiftUIViper
+import Foundation
 
 struct MockRecipesBookInteractorDependencies: RecipesBookInteractorDependenciesProtocol {
     let apiService: APIService

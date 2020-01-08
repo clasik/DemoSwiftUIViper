@@ -10,15 +10,15 @@ struct RecipeDetailView: View {
 }
 
 #if DEBUG
-struct RecipeDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        let recipe = RecipeViewModel(title: "",
-                                     href: "",
-                                     ingredients: "",
-                                     thumbnail: "",
-                                     favourite: false,
-                                     hasLactose: false)
-        return RecipeDetailView(recipe: recipe)
+    struct RecipeDetailView_Previews: PreviewProvider {
+        static var previews: some View {
+            let recipe = RecipeViewModel(title: "",
+                                         href: "",
+                                         ingredients: "",
+                                         thumbnail: "",
+                                         favourite: false,
+                                         hasLactose: false)
+            return RecipeDetailView(recipe: recipe)
+        }
     }
-}
 #endif

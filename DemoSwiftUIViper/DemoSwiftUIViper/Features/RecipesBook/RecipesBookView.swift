@@ -1,8 +1,6 @@
 import SwiftUI
 
-protocol RecipesBookViewProtocol: RecipesBookProtocol {
-
-}
+protocol RecipesBookViewProtocol: RecipesBookProtocol {}
 
 struct RecipesBookView: View {
     @ObservedObject private var presenter = RecipesBookWireframe.makePresenter()
@@ -13,16 +11,25 @@ struct RecipesBookView: View {
     var body: some View {
         NavigationView {
             VStack {
-                TextField("filter_by_ingredients".localized, text: $ingredients, onCommit: {
-                    self.presenter.didTriggerAction(.updateIngredients(self.ingredients))
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
-                                                    to: nil, from: nil, for: nil)
-                }).textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
+                HStack {
+                    Button(action: {
+                        self.presenter.didTriggerAction(.updateIngredients(self.ingredients))
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                                        to: nil, from: nil, for: nil)
+                    }) {
+                        Image(systemName: "magnifyingglass")
+                    }.padding(.trailing, 8).accessibility(identifier: "search_button")
+                    TextField("filter_by_ingredients".localized, text: $ingredients, onCommit: {
+                        self.presenter.didTriggerAction(.updateIngredients(self.ingredients))
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                                        to: nil, from: nil, for: nil)
+                    }).textFieldStyle(RoundedBorderTextFieldStyle())
+                }
+                .padding()
                 List(presenter.recipeViewModels, rowContent: { recipeViewModel in
                     NavigationLink(destination: RecipeDetailView(recipe: recipeViewModel)) {
                         RecipeCellView(recipe: recipeViewModel, onFavouriteTapGasture: {
-                             self.makeFavourite(recipeViewModel)
+                            self.makeFavourite(recipeViewModel)
                         }).onAppear {
                             self.listItemAppears(recipeViewModel)
                         }
@@ -31,8 +38,7 @@ struct RecipesBookView: View {
             }.navigationBarTitle("recipes".localized).navigationBarItems(trailing:
                 NavigationLink(destination: FavouriteRecipesView()) {
                     Image(systemName: "heart.fill")
-                }
-            )
+            })
         }
         .onAppear {
             self.presenter.didReceiveEvent(.viewAppears)
@@ -44,29 +50,25 @@ struct RecipesBookView: View {
 
     private func listItemAppears<Item: Identifiable>(_ item: Item) {
         if presenter.recipeViewModels.closeToLastItem(item) {
-            self.presenter.didTriggerAction(.nextPage)
+            presenter.didTriggerAction(.nextPage)
         }
     }
 
     private func makeFavourite<Item: Identifiable>(_ item: Item) {
         if let item = item as? RecipeViewModel {
-            self.presenter.didTriggerAction(.makeFavourite(item))
+            presenter.didTriggerAction(.makeFavourite(item))
         }
     }
 }
 
-extension RecipesBookView: RecipesBookViewProtocol {
+extension RecipesBookView: RecipesBookViewProtocol {}
 
-}
-
-extension RecipesBookView: RecipesBookProtocol {
-
-}
+extension RecipesBookView: RecipesBookProtocol {}
 
 #if DEBUG
-struct RecipesBookView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecipesBookView()
+    struct RecipesBookView_Previews: PreviewProvider {
+        static var previews: some View {
+            RecipesBookView()
+        }
     }
-}
 #endif

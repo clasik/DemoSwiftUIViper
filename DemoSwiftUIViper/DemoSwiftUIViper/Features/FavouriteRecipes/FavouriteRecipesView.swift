@@ -1,9 +1,7 @@
-import SwiftUI
 import CoreData
+import SwiftUI
 
-protocol FavouriteRecipesViewProtocol: FavouriteRecipesProtocol {
-
-}
+protocol FavouriteRecipesViewProtocol: FavouriteRecipesProtocol {}
 
 struct FavouriteRecipesView: View {
     @ObservedObject private var presenter = FavouriteRecipesWireframe.makePresenter()
@@ -21,31 +19,27 @@ struct FavouriteRecipesView: View {
                 DispatchQueue.main.async {
                     self.presenter.didReceiveEvent(.viewAppears)
                 }
-        }
-        .onDisappear {
-            self.presenter.didReceiveEvent(.viewDisappears)
-        }
+            }
+            .onDisappear {
+                self.presenter.didReceiveEvent(.viewDisappears)
+            }
     }
 
     private func makeFavourite<Item: Identifiable>(_ item: Item) {
         if let item = item as? RecipeViewModel {
-           self.presenter.didTriggerAction(.makeFavourite(item))
+            presenter.didTriggerAction(.makeFavourite(item))
         }
     }
 }
 
-extension FavouriteRecipesView: FavouriteRecipesViewProtocol {
+extension FavouriteRecipesView: FavouriteRecipesViewProtocol {}
 
-}
-
-extension FavouriteRecipesView: FavouriteRecipesProtocol {
-
-}
+extension FavouriteRecipesView: FavouriteRecipesProtocol {}
 
 #if DEBUG
-struct FavouriteRecipesView_Previews: PreviewProvider {
-    static var previews: some View {
-        FavouriteRecipesView()
+    struct FavouriteRecipesView_Previews: PreviewProvider {
+        static var previews: some View {
+            FavouriteRecipesView()
+        }
     }
-}
 #endif

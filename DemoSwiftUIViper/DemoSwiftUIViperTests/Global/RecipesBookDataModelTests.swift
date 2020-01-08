@@ -1,17 +1,16 @@
-import XCTest
 @testable import DemoSwiftUIViper
+import XCTest
 
 class RecipesBookDataModelTests: XCTestCase {
-
     var sut: RecipesBookResponseModel!
     var rdm: RecipeDataModel!
 
     override func setUp() {
         super.setUp()
         rdm = RecipeDataModel(title: "title",
-                                  href: "http://allrecipes.com/Recipe/Ginger-Champagne/Detail.aspx",
-                                  ingredients: "ingredients",
-                                  thumbnail: "thumbnail")
+                              href: "http://allrecipes.com/Recipe/Ginger-Champagne/Detail.aspx",
+                              ingredients: "ingredients",
+                              thumbnail: "thumbnail")
         sut = RecipesBookResponseModel(title: "title",
                                        version: 1.0,
                                        href: "http://www.recipepuppy.com",
@@ -66,7 +65,5 @@ class RecipesBookDataModelTests: XCTestCase {
         XCTAssertEqual(dataModel.version, 1.0)
         XCTAssertEqual(dataModel.href, "http://www.recipepuppy.com")
         XCTAssertEqual(dataModel.results.count, 1)
-
     }
-
 }

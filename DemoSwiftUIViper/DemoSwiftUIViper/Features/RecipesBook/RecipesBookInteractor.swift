@@ -31,28 +31,26 @@ final class RecipesBookInteractor {
 }
 
 extension RecipesBookInteractor: RecipesBookInteractorProtocol {
-
     func checkIsFavourite(recipe: RecipeDataModel) -> Bool {
-        return self.dependencies.coreDataService.checkIsFavourite(recipe: recipe)
+        return dependencies.coreDataService.checkIsFavourite(recipe: recipe)
     }
 
     func getCurrentRecipes() -> AnyPublisher<[RecipeDataModel], Error> {
-        return self.dependencies.apiService.getRecipes(page: currentPage, ingredients: ingredients)
+        return dependencies.apiService.getRecipes(page: currentPage, ingredients: ingredients)
             .tryCompactMap { recipesBookResponseModel in
-                return try recipesBookResponseModel.recipesBookDataModel().results
-        }.eraseToAnyPublisher()
+                try recipesBookResponseModel.recipesBookDataModel().results
+            }.eraseToAnyPublisher()
     }
 
     func getNextRecipes() -> AnyPublisher<[RecipeDataModel], Error> {
         currentPage += 1
-        return self.dependencies.apiService.getRecipes(page: currentPage, ingredients: ingredients)
+        return dependencies.apiService.getRecipes(page: currentPage, ingredients: ingredients)
             .tryCompactMap { recipesBookResponseModel in
-                return try recipesBookResponseModel.recipesBookDataModel().results
-        }.eraseToAnyPublisher()
+                try recipesBookResponseModel.recipesBookDataModel().results
+            }.eraseToAnyPublisher()
     }
 
     func makeFavourite(recipe: RecipeDataModel) {
-        self.dependencies.coreDataService.makeFavourite(recipe: recipe)
+        dependencies.coreDataService.makeFavourite(recipe: recipe)
     }
-
 }

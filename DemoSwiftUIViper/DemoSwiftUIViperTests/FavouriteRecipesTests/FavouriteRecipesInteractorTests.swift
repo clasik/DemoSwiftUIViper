@@ -1,9 +1,8 @@
-import XCTest
 import Combine
 @testable import DemoSwiftUIViper
+import XCTest
 
 class FavouriteRecipesInteractorTests: XCTestCase {
-
     var sut: FavouriteRecipesInteractor!
     var rdm: RecipeDataModel!
 
@@ -27,5 +26,4 @@ class FavouriteRecipesInteractorTests: XCTestCase {
 
         XCTAssertTrue(sut.getRecipes().count > 0)
     }
-
 }

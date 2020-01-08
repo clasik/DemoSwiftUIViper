@@ -1,7 +1,6 @@
 import XCTest
 
 class DemoSwiftUIViperUITests: XCTestCase {
-
     var app: XCUIApplication!
 
     override func setUp() {
@@ -14,8 +13,8 @@ class DemoSwiftUIViperUITests: XCTestCase {
         XCTAssertTrue(textField.waitForExistence(timeout: 5))
         textField.tap()
         textField.typeText("Cheese")
-        XCTAssertTrue(app.keyboards.buttons["Return"].waitForExistence(timeout: 5))
-        app.keyboards.buttons["intro"].tap()
+        XCTAssertTrue(app.buttons["search_button"].waitForExistence(timeout: 5))
+        app.buttons["search_button"].tap()
 
         let lactoseCell = app.tables
             .buttons["Has lactose\nEasy Easter Carrots (Peter Rabbit's Carrots)\ncheese"]

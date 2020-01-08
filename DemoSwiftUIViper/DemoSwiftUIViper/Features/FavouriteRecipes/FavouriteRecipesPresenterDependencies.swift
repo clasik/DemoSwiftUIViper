@@ -1,7 +1,5 @@
 import Foundation
 
-protocol FavouriteRecipesPresenterDependenciesProtocol {
-}
+protocol FavouriteRecipesPresenterDependenciesProtocol {}
 
-struct FavouriteRecipesPresenterDependencies: FavouriteRecipesPresenterDependenciesProtocol {
-}
+struct FavouriteRecipesPresenterDependencies: FavouriteRecipesPresenterDependenciesProtocol {}

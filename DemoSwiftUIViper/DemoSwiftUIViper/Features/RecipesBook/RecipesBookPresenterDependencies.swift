@@ -1,7 +1,5 @@
 import Foundation
 
-protocol RecipesBookPresenterDependenciesProtocol {
-}
+protocol RecipesBookPresenterDependenciesProtocol {}
 
-struct RecipesBookPresenterDependencies: RecipesBookPresenterDependenciesProtocol {
-}
+struct RecipesBookPresenterDependencies: RecipesBookPresenterDependenciesProtocol {}

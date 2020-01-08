@@ -475,6 +475,7 @@
 				73A4E15C23BFA68700213D1D /* Sources */,
 				73A4E15D23BFA68700213D1D /* Frameworks */,
 				73A4E15E23BFA68700213D1D /* Resources */,
+				7332897923C5DDD20061CCB5 /* Run Script - Swiftformat */,
 			);
 			buildRules = (
 			);
@@ -602,6 +603,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7332897923C5DDD20061CCB5 /* Run Script - Swiftformat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - Swiftformat";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd BuildTools\n#swift package update #Uncomment this line temporarily to update the version used to the latest matching your BuildTools/Package.swift file\nswift run -c release swiftformat \"$SRCROOT\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		73A4E15C23BFA68700213D1D /* Sources */ = {

@@ -1,8 +1,7 @@
-import XCTest
 @testable import DemoSwiftUIViper
+import XCTest
 
 class CoreDataServiceTests: XCTestCase {
-
     var sut: CoreDataService!
     var rdm: RecipeDataModel!
 
@@ -24,5 +23,4 @@ class CoreDataServiceTests: XCTestCase {
         XCTAssertTrue(sut.deleteRecipe(recipe: rdm))
         XCTAssertFalse(sut.checkIsFavourite(recipe: rdm))
     }
-
 }

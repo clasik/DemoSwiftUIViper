@@ -22,7 +22,7 @@ struct RecipeCellView: View {
                             .padding(EdgeInsets(top: 4, leading: 20, bottom: 4, trailing: 20))
                             .background(Color.red)
                             .rotationEffect(Angle(degrees: 45))
-                            .position(x: geometry.size.width-35, y: 35)
+                            .position(x: geometry.size.width - 35, y: 35)
                             .accessibility(identifier: "Has lactose")
                     }
                 }
@@ -43,17 +43,15 @@ struct RecipeCellView: View {
 }
 
 #if DEBUG
-struct RecipeCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        let recipe = RecipeViewModel(title: "",
-                                     href: "",
-                                     ingredients: "",
-                                     thumbnail: "",
-                                     favourite: false,
-                                     hasLactose: false)
-        return RecipeCellView(recipe: recipe, onFavouriteTapGasture: {
-
-        })
+    struct RecipeCellView_Previews: PreviewProvider {
+        static var previews: some View {
+            let recipe = RecipeViewModel(title: "",
+                                         href: "",
+                                         ingredients: "",
+                                         thumbnail: "",
+                                         favourite: false,
+                                         hasLactose: false)
+            return RecipeCellView(recipe: recipe, onFavouriteTapGasture: {})
+        }
     }
-}
 #endif

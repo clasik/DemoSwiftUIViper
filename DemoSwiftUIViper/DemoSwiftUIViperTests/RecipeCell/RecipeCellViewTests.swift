@@ -1,7 +1,7 @@
-import XCTest
 import SnapshotTesting
-import UIKit
 import SwiftUI
+import UIKit
+import XCTest
 
 @testable import DemoSwiftUIViper
 
@@ -25,8 +25,7 @@ class RecipeCellViewTests: XCTestCase {
                                                          ingredients: ingredients,
                                                          thumbnail: thumbnail,
                                                          favourite: false,
-                                                         hasLactose: false), onFavouriteTapGasture: {
-        })
+                                                         hasLactose: false), onFavouriteTapGasture: {})
         XCTAssertNotNil(sut.body)
     }
 
@@ -36,8 +35,7 @@ class RecipeCellViewTests: XCTestCase {
                                                          ingredients: ingredients,
                                                          thumbnail: thumbnail,
                                                          favourite: false,
-                                                         hasLactose: false), onFavouriteTapGasture: {
-        })
+                                                         hasLactose: false), onFavouriteTapGasture: {})
         let scale = String(Int(Float(UIScreen.main.scale)))
         ColorScheme.allCases.forEach { scheme in
             let hostingController = UIHostingController(rootView: sut.colorScheme(scheme))
@@ -60,8 +58,7 @@ class RecipeCellViewTests: XCTestCase {
                                                          ingredients: ingredients,
                                                          thumbnail: thumbnail,
                                                          favourite: true,
-                                                         hasLactose: true), onFavouriteTapGasture: {
-        })
+                                                         hasLactose: true), onFavouriteTapGasture: {})
         let scale = String(Int(Float(UIScreen.main.scale)))
         ColorScheme.allCases.forEach { scheme in
             let hostingController = UIHostingController(rootView: sut.colorScheme(scheme))
@@ -77,5 +74,4 @@ class RecipeCellViewTests: XCTestCase {
                            line: #line)
         }
     }
-
 }

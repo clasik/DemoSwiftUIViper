@@ -1,4 +1,3 @@
 import Foundation
 
-protocol RecipesBookProtocol {
-}
+protocol RecipesBookProtocol {}

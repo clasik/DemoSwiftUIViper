@@ -1,8 +1,7 @@
-import XCTest
 @testable import DemoSwiftUIViper
+import XCTest
 
 class APIServiceTests: XCTestCase {
-
     var sut: APIService!
 
     override func setUp() {
@@ -23,5 +22,4 @@ class APIServiceTests: XCTestCase {
         let recipes = sut.getRecipes(page: 1, ingredients: "ingredients")
         XCTAssertNotNil(recipes)
     }
-
 }

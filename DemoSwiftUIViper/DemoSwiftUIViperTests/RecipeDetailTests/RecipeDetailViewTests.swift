@@ -1,8 +1,7 @@
-import XCTest
 @testable import DemoSwiftUIViper
+import XCTest
 
 class RecipeDetailViewTests: XCTestCase {
-
     var sut: RecipeDetailView!
 
     override func setUp() {
@@ -23,5 +22,4 @@ class RecipeDetailViewTests: XCTestCase {
     func testBodyExists() {
         XCTAssertNotNil(sut.body)
     }
-
 }

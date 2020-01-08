@@ -26,15 +26,15 @@ extension FavouriteRecipesPresenter: FavouriteRecipesPresenterProtocol {
         case .viewAppears:
             getCurrentRecipes()
         case .viewDisappears:
-            getCurrentRecipesCancellable.forEach({ anyCancellable in
+            getCurrentRecipesCancellable.forEach { anyCancellable in
                 anyCancellable.cancel()
-            })
+            }
         }
     }
 
     func didTriggerAction(_ action: FavouriteRecipesAction) {
         switch action {
-        case .makeFavourite(let recipe):
+        case let .makeFavourite(recipe):
             makeFavourite(recipe: recipe)
         case .retry:
             getCurrentRecipes()
@@ -44,23 +44,23 @@ extension FavouriteRecipesPresenter: FavouriteRecipesPresenterProtocol {
 
 extension FavouriteRecipesPresenter {
     private func getCurrentRecipes() {
-        let recipeViewModels: [RecipeViewModel] = self.interactor.getRecipes().compactMap { recipeDataModel in
-            return RecipeViewModel(title: recipeDataModel.title,
-                                   href: recipeDataModel.href,
-                                   ingredients: recipeDataModel.ingredients,
-                                   thumbnail: recipeDataModel.thumbnail,
-                                   favourite: self.interactor.checkIsFavourite(recipe: recipeDataModel),
-                                   hasLactose: recipeDataModel.ingredients.lowercased().contains("milk") ||
-                                    recipeDataModel.ingredients.lowercased().contains("cheese"))
+        let recipeViewModels: [RecipeViewModel] = interactor.getRecipes().compactMap { recipeDataModel in
+            RecipeViewModel(title: recipeDataModel.title,
+                            href: recipeDataModel.href,
+                            ingredients: recipeDataModel.ingredients,
+                            thumbnail: recipeDataModel.thumbnail,
+                            favourite: self.interactor.checkIsFavourite(recipe: recipeDataModel),
+                            hasLactose: recipeDataModel.ingredients.lowercased().contains("milk") ||
+                                recipeDataModel.ingredients.lowercased().contains("cheese"))
         }
         self.recipeViewModels.append(contentsOf: recipeViewModels)
     }
 
     private func makeFavourite(recipe: RecipeViewModel) {
-        self.interactor.makeFavourite(recipe: RecipeDataModel(title: recipe.title,
-                                                              href: recipe.href,
-                                                              ingredients: recipe.ingredients,
-                                                              thumbnail: recipe.thumbnail))
-        self.recipeViewModels.removeAll(where: { $0.title == recipe.title})
+        interactor.makeFavourite(recipe: RecipeDataModel(title: recipe.title,
+                                                         href: recipe.href,
+                                                         ingredients: recipe.ingredients,
+                                                         thumbnail: recipe.thumbnail))
+        recipeViewModels.removeAll(where: { $0.title == recipe.title })
     }
 }

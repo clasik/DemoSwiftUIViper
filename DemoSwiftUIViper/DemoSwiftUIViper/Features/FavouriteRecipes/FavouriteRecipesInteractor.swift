@@ -16,15 +16,14 @@ final class FavouriteRecipesInteractor {
 }
 
 extension FavouriteRecipesInteractor: FavouriteRecipesInteractorProtocol {
-
     func checkIsFavourite(recipe: RecipeDataModel) -> Bool {
-        return self.dependencies.coreDataService.checkIsFavourite(recipe: recipe)
+        return dependencies.coreDataService.checkIsFavourite(recipe: recipe)
     }
 
     func getRecipes() -> [RecipeDataModel] {
         var recipeDataModels = [RecipeDataModel]()
-        let fetechedObjects = self.dependencies.coreDataService.getRecipes()
-        fetechedObjects?.forEach({ fetechedObject in
+        let fetechedObjects = dependencies.coreDataService.getRecipes()
+        fetechedObjects?.forEach { fetechedObject in
             if let fetechedObject = fetechedObject as? Recipe {
                 let recipeDataModel = RecipeDataModel(title: fetechedObject.title ?? "",
                                                       href: fetechedObject.href ?? "",
@@ -32,11 +31,11 @@ extension FavouriteRecipesInteractor: FavouriteRecipesInteractorProtocol {
                                                       thumbnail: fetechedObject.thumbnail ?? "")
                 recipeDataModels.append(recipeDataModel)
             }
-        })
+        }
         return recipeDataModels
     }
 
     func makeFavourite(recipe: RecipeDataModel) {
-        _ = self.dependencies.coreDataService.deleteRecipe(recipe: recipe)
+        _ = dependencies.coreDataService.deleteRecipe(recipe: recipe)
     }
 }

@@ -1,5 +1,3 @@
 import Foundation
 
-protocol RecipesBookDelegateProtocol: class {
-
-}
+protocol RecipesBookDelegateProtocol: class {}

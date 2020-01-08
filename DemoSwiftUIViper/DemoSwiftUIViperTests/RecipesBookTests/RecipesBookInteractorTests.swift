@@ -1,9 +1,8 @@
-import XCTest
 import Combine
 @testable import DemoSwiftUIViper
+import XCTest
 
 class RecipesBookInteractorTests: XCTestCase {
-
     var sut: RecipesBookInteractor!
     var rdm: RecipeDataModel!
 
@@ -26,15 +25,14 @@ class RecipesBookInteractorTests: XCTestCase {
     }
 
     func testNextCurrentRecipes() {
-           let publisher = sut.getNextRecipes()
-           let validTest = evalValidResponseTest(publisher: publisher)
-           wait(for: validTest.expectations, timeout: 3)
-           validTest.cancellable?.cancel()
-       }
+        let publisher = sut.getNextRecipes()
+        let validTest = evalValidResponseTest(publisher: publisher)
+        wait(for: validTest.expectations, timeout: 3)
+        validTest.cancellable?.cancel()
+    }
 
     func testMakeFavourite() {
         sut.makeFavourite(recipe: rdm)
         XCTAssertTrue(sut.checkIsFavourite(recipe: rdm))
     }
-
 }
