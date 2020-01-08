@@ -1,37 +1,19 @@
-## Welcome to GitHub Pages
+# DemoSwiftUIViper
+![Build Status](https://travis-ci.com/clasik/DemoSwiftUIViper.svg?branch=master)
 
-You can use the [editor on GitHub](https://github.com/clasik/DemoSwiftUIViper/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+[Download ZIP](https://github.com/clasik/DemoSwiftUIViper/archive/master.zip)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### I chose this configuration of architecture:
+- Swift Package Manage: It is a tool for managing the distribution of Swift code.
+- VIPER: It supply decouple the code for reusability and testability
+- SwiftUI: it is the lastest interface technology of Apple
+- Combine: it is reactive programming framework.
+- SnapshotTest: It allows to test very easily.
 
-### Markdown
+### Another architecture alternative I considered is MVVM, easier and simpler of implement
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/clasik/DemoSwiftUIViper/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### I would improve if I had more time:
+- Improve Unit Tests
+- Integration Sourcery for AutoMockable protocols
+- API Server Mock Responses
